@@ -1,0 +1,26 @@
+h1 Listing articles
+
+table
+  thead
+    tr
+      th Name
+      th Content
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @articles.each do |article|
+      tr
+        td = article.name
+        td = article.content
+        td = article.user.email
+        td = link_to 'Show', article
+        - if can?(:create, Article)
+          td = link_to 'Edit', edit_article_path(article)
+          td = link_to 'Destroy', article, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+- if can?(:create, Article)
+  = link_to 'New Article', new_article_path
